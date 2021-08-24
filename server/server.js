@@ -1,9 +1,19 @@
 const express = require('express');
+const { Mongoose } = require('mongoose');
 const morgan = require('morgan');
 // const bodyParser = require('body-parser');
-
+const mongoose = require('mongoose')
 const app = express();
 
+mongoose.connect('mongodb+srv://root:gE4KAGPi2Jm6dzrx@amazon-clone.noxfp.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',
+    { useNewUrlParser: true, useUnifiedTopology: true },
+        (err) => {
+            if (err) {
+                console.log(err);
+            } else {
+                console.log('success connection');
+            }
+});
 // middleware
 app.use(morgan('dev'));
 app.use(express.json());
