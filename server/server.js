@@ -5,6 +5,7 @@ const morgan = require('morgan');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 dotenv.config();
+const User = require('./models/user')
 const app = express();
 
 mongoose.connect(process.env.DATABASE,
@@ -21,13 +22,9 @@ app.use(morgan('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-app.get('/', (req, res) => {
-    res.json('Hello test');
-});
-
-app.post('/', (req, res) => {
-    console.log((req.body.name));
-});
+// require apis
+const productRoutes = require('./routes/product');
+app.use('/api', productRoutes)
 
 app.listen(3000, (err) => {
     if (err) {
